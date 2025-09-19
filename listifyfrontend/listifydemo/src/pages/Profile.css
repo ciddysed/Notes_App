@@ -1,0 +1,103 @@
+/* Profile page container styling */
+.profile-container {
+    width: 800px; /* Limit the width of the profile container */
+    margin: 0 auto; /* Center the container */
+    padding: 20px;
+    background-color: #fff; /* White background for contrast */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+    border-radius: 20px; /* Rounded corners */
+    text-align: center; /* Center align text */
+}
+
+/* Profile header (logo + welcome message) styling */
+.profileHeader {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    justify-content: center; /* Center horizontally */
+    gap: 20px; /* Add spacing between logo and text */
+    margin-bottom: 20px; /* Margin below the profile header */
+}
+
+/* Welcome container styling */
+.welcome-container {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    gap: 15px; /* Add spacing between elements */
+}
+
+/* Welcome box styling */
+.welcome-box {
+    background-color: #4b6cb7; /* Blue background */
+    padding: 10px 20px;
+    border-radius: 15px;
+    display: inline-block;
+    text-align: center;
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4); /* Add shadow */
+}
+
+/* Welcome box title */
+.welcome-box h1 {
+    font-family: 'Arial', sans-serif; /* Font family */
+    font-size: 2.5rem;
+    color: white; /* White text */
+    margin: 0;
+    font-weight: bold;
+}
+
+/* Welcome text styling */
+.welcome-text {
+    font-family: 'Arial', sans-serif; /* Font family */
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin: 0;
+    font-weight: bold;
+}
+
+/* Divider line between the welcome text and logout button */
+.divider {
+    width: 80%; /* Adjust the width of the divider */
+    border-top: 1px solid #ccc; /* Light gray line */
+    margin: 20px auto; /* Center the divider and add vertical space */
+}
+
+/* Logout button container styling */
+.logout-container {
+    display: flex;
+    justify-content: center; /* Center the button horizontally */
+    margin-top: 20px;
+}
+
+/* Logout button styling */
+.logout-button {
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    padding: 10px 20px;
+    background-color: #e74c3c; /* Red background for logout */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+.logout-button:hover {
+    background-color: #c0392b; /* Darker red on hover */
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+
+    .welcome-box h1,
+    .welcome-text {
+        font-size: 1.8rem; /* Adjust font size */
+    }
+
+    .logout-button {
+        font-size: 0.9rem; /* Adjust button font size */
+        padding: 8px 15px; /* Adjust button padding */
+    }
+}

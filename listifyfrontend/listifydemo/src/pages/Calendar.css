@@ -1,0 +1,243 @@
+/* Calendar Container */
+.calendar {
+    background-color: #182848;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* Calendar Page */
+.calendar-page {
+    width: 100vh;
+}
+
+/* Calendar Styling */
+.rbc-calendar {
+    border: none;
+    color: #182848;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* Weekday Headers */
+.rbc-header {
+    background-color: #182848;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 8px 0;
+    text-align: center;
+    border-bottom: 1px solid #182848;
+    border-radius: 8px 8px 0 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Day Cells and Grid Lines */
+.rbc-day-bg {
+    border: 1px solid #182848;
+    transition: background-color 0.3s ease;
+}
+
+.rbc-day-bg:hover {
+    background-color: #00134071;
+    cursor: pointer;
+    border: 1px solid #4b6cb7;
+}
+
+/* Month Rows */
+.rbc-month-row {
+    border-bottom: 1px solid #182848;
+}
+
+/* Highlighted Days */
+.rbc-selected-cell {
+    background-color: #182848 !important;
+    color: #ffffff;
+}
+
+/* Event Styling */
+.rbc-event {
+    background-color: #182848;
+    color: #ffffff;
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid #182848;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+/* Weekday Names */
+.rbc-day-header {
+    color: #182848;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 8px;
+    border-bottom: 1px solid #182848;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* Other Months' Days */
+.rbc-off-range-bg {
+    background-color: #00134071;
+}
+
+/* Today Styling */
+.rbc-today {
+    background-color: #00134071 !important;
+    border-radius: 8px;
+    border: 1px solid #182848;
+}
+
+/* Toolbar Styling */
+.rbc-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #182848;
+    padding: 10px;
+    color: white;
+    border-radius: 8px;
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.rbc-toolbar button {
+    background-color: #182848;
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
+    transition: background-color 0.3s ease;
+}
+
+.rbc-toolbar button:hover {
+    background-color: #ffffff;
+    color: #182848;
+}
+
+.rbc-toolbar button:active {
+    background-color: #ffffff;
+    color: #182848;
+}
+
+/* Calendar Grid Border */
+.rbc-month-view {
+    border: 1px solid #182848;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Task List */
+.task-list {
+    background-color: #182848;
+    border-radius: 12px;
+    padding: 25px 30px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    font-family: 'Open Sans', sans-serif;
+    color: #ffffff;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Task List Header */
+.task-header {
+    border-bottom: 2px solid #4b6cb7;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.task-header h3 {
+    font-size: 1.8em;
+    color: #182848;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Task Items */
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+}
+
+.task-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .task-list {
+        padding: 20px;
+        width: 90%;
+    }
+
+    .task-header h3 {
+        font-size: 1.5em;
+    }
+
+    .task-item {
+        padding: 10px;
+    }
+}
+.calendar-page h2 {
+    font-family: 'Roboto', sans-serif; /* Or use your desired font */
+}
+
+.title-container {
+    background-color: #182848; /* Background color for the title container */
+    color: #fff; /* Text color for the title */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-bottom: 20px; /* Space below the title container */
+}
+
+/* Title styling */
+.title-container h2 {
+    font-family: 'Open Sans', sans-serif; /* Use Open Sans font */
+    font-size: 2em; /* Make the title larger */
+    margin: 0;
+    color: #ffffff;
+}
+
+/* Record Task Container */
+.record-task-container {
+    position: relative; /* Can use absolute for precise positioning */
+    z-index: 10; /* Ensure it appears above the calendar */
+    background-color: #ffffff;
+    border: 2px solid #182848;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    color: #182848;
+}
+
+/* Adjust calendar container */
+.calendar {
+    position: relative;
+    z-index: 1; /* Ensure it's below the task container */
+}
+
+/* Ensure no overlap issues */
+.calendar-page {
+    position: relative;
+}
+
+/* Other styles remain unchanged... */

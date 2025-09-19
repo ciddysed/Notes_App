@@ -1,0 +1,21 @@
+.notification-btn {
+    position: relative; /* Ensure this element becomes the positioning context */
+    font-size: 24px; /* Adjust icon size if necessary */
+    color: #fff; /* White or desired color */
+    text-decoration: none;
+  }
+  
+  .notification-badge {
+    position: absolute; /* Position relative to the notification-btn */
+    top: -5px; /* Adjust based on your bell icon size */
+    right: -5px; /* Adjust based on your bell icon size */
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

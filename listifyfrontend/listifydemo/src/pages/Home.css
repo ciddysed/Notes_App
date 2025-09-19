@@ -1,0 +1,130 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lora:wght@400;600&display=swap');
+
+/* Apply fonts to the body and specific elements */
+body {
+    font-family: 'Arial', sans-serif; /* Default font for the app */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Container styling */
+.home-container {
+    width: 1000px; /* Increase the container width */
+    margin: 0 auto; /* Center the container on the page */
+    padding: 20px;
+    background-color: #fff; /* Add a white background for contrast */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Increase shadow size */
+    border-radius: 10px; /* Rounded corners */
+}
+
+/* Welcome container styling */
+.welcome-container {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    justify-content: center; /* Center horizontally */
+    gap: 15px; /* Add spacing between elements */
+    margin: 20px auto;
+}
+
+.welcome-box {
+    background-color: #4b6cb7; /* Blue background */
+    padding: 10px 20px;
+    border-radius: 15px;
+    display: inline-block;
+    text-align: center;
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4); /* Add a bigger shadow */
+}
+
+.welcome-box h1 {
+    font-family: 'Arial', sans-serif; /* Match the default font */
+    font-size: 2.5rem;
+    color: white; /* White text for contrast */
+    margin: 0;
+    font-weight: bold;
+}
+
+.welcome-text {
+    font-family: 'Arial', sans-serif; /* Match the default font */
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin: 0;
+    font-weight: bold;
+}
+
+/* Logo styling */
+.logo {
+    display: block;
+    margin: 10px auto;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Tagline styling */
+.tagline {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #7f8c8d;
+    margin: 10px 0 30px;
+}
+
+/* Call-to-action button styling */
+.cta-section {
+    display: flex;
+    justify-content: center; /* Center the button horizontally */
+    margin: 20px 0;
+}
+
+.cta-button {
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    padding: 10px 20px;
+    background-color: #2c3e50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 50px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4); /* Add a bigger shadow */
+}
+
+.cta-button:hover {
+    background-color: #4b6cb7;
+}
+
+/* Footer styling */
+.footer-text {
+    font-size: 0.9rem;
+    text-align: center;
+    color: #95a5a6;
+    margin: 10px auto; /* Center the copyright text */
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+    .home-container {
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+
+    .welcome-container {
+        flex-direction: column; /* Stack elements vertically */
+        gap: 10px;
+    }
+
+    .welcome-box h1,
+    .welcome-text {
+        font-size: 1.8rem; /* Adjust font size for better readability */
+    }
+
+    .logo {
+        width: 120px; /* Reduce logo size */
+        height: 120px;
+    }
+}
+

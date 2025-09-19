@@ -1,0 +1,164 @@
+/* Add font import (Google Fonts) */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Arial:wght@400&display=swap');
+
+/* Layout styles */
+.task-list-container {
+    background-color: #ffffff;
+    
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #ffffff; /* Task item background color */
+    width: 137vh;
+    margin-top: 20px;
+    font-family: 'Arial', sans-serif; /* Apply Arial font to task items */
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+    z-index: 999;
+}
+
+.task-content {
+    flex: 1;
+}
+
+.task-content h3 {
+    display: inline;
+    font-size: 1.2em;
+    color: #182848; /* Text color for task heading */
+    font-family: 'Roboto', sans-serif; /* Apply Roboto font to task headings */
+}
+
+.task-status {
+    margin-left: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white; /* Text color for task status */
+    background-color: #182848; /* Dark blue background for status */
+    font-family: 'Arial', sans-serif; /* Apply Arial font to task status */
+}
+
+/* Button styles */
+.task-actions {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    cursor: pointer;
+    padding: 8px 12px;
+    font-size: 0.9em;
+    border: none;
+    border-radius: 5px;
+    background-color: #182848; /* Button background color */
+    color: white; /* Button text color */
+    font-family: 'Arial', sans-serif; /* Apply Arial font to buttons */
+}
+
+.update-btn {
+    background-color: #00c2b2; /* Matching the dark blue */
+}
+
+.delete-btn {
+    background-color: #D9534F;
+    color: white; /* Red delete button */
+}
+
+.remove-date-btn {
+    background-color: #f0ad4e;
+    color: white;
+}
+
+/* Subnotes section */
+/* Subnotes section */
+.subnotes-section {
+    padding: 10px 20px;
+    background-color: #ececec;
+    border-radius: 8px;
+    font-family: 'Arial', sans-serif; /* Apply Arial font to subnotes */
+    color: #7f9cba; /* Change text color to #7f9cba */
+}
+
+
+/* Input section */
+.todo-input {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 20px;
+    position: fixed; /* Fixed position */
+    bottom: 0; /* Align it at the bottom of the screen */
+    width: 143vh; /* Full width */
+    background-color: #182848; /* Light background */
+    z-index: 999; /* Ensure it's above other elements */
+    border-radius: 30px;
+    left: 525px;
+}
+
+.todo-input input[type="text"] {
+    padding: 8px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    flex: 1;
+    font-family: 'Arial', sans-serif; /* Apply Arial font to input */
+}
+
+.todo-input select {
+    padding: 8px;
+    font-size: 1em;
+    border-radius: 15px;
+    font-family: 'Arial', sans-serif; /* Apply Arial font to select dropdown */
+    background-color: #f0ad4e;
+}
+
+.todo-input button {
+    background-color: #00c2b2; /* Dark blue button color */
+    color: #182848; /* Button text color */
+    border: none;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-family: 'Arial', sans-serif; /* Apply Arial font to button */
+    font-weight: bold;
+}
+
+/* Add Task button - fixed at the bottom */
+.add-task-btn {
+    position: fixed; /* Fixed position */
+    bottom: 20px; /* 20px from the bottom of the screen */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for exact center alignment */
+    background-color: #182848; /* Dark blue background */
+    color: rgb(255, 255, 255); /* White text color */
+    padding: 12px 20px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Arial', sans-serif; /* Apply Arial font to button */
+    z-index: 1000; /* Ensure the button is on top of other elements */
+}
+
+/* Container for the main content */
+.task-list-container {
+    height: calc(100vh - 140px); /* Subtract height of fixed elements */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding-bottom: 100px; /* Space for the fixed todo input and add task button */
+}
+
+/* Scrollable task list */
+.task-list {
+    padding: 20px;
+    overflow-y: auto; /* Ensure scrolling for task list */
+}
+
+/* Ensure body or container allows for scrolling */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}

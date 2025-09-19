@@ -1,0 +1,140 @@
+/* General Container */
+.notification-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    min-height: 500px; /* Ensure the container is tall enough */
+    justify-content: space-between; /* Space out the content */
+  }
+  
+  /* Notification Box at the top */
+  .NotificationBox {
+    background-color: #182848; /* Blue background */
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100vh;
+  }
+  
+  .NotificationBox h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  /* Header */
+  .notification-header {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+  }
+  
+  /* Generate Button */
+  .generate-btn {
+    background-color: #182848;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: auto; /* Push the button to the bottom */
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .generate-btn:hover {
+    background-color: #4b6cb7;
+  }
+  
+  /* Notification List */
+  .notification-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1; /* Allow the list to take available space */
+    width: 100vh;
+  }
+  
+  .notification-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .notification-item:hover {
+    background-color: #f1f1f1;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style for Read Notifications */
+  .notification-item.read {
+    background-color: #e5e5e5;
+    opacity: 0.7;
+    pointer-events: none; /* Disable interaction with already read notifications */
+  }
+  
+  /* Notification Title */
+  .notification-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Task Info */
+  .notification-task {
+    font-size: 1rem;
+    color: #666;
+    margin-top: 5px;
+  }
+  
+  /* Date Info */
+  .notification-date {
+    font-size: 0.9rem;
+    color: #999;
+    margin-top: 5px;
+  }
+  
+  /* No Notifications Text */
+  .no-notifications {
+    font-size: 1rem;
+    color: #777;
+    text-align: center;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+  }
+  
+  /* Mobile Responsive */
+  @media (max-width: 600px) {
+    .notification-container {
+      padding: 15px;
+    }
+  
+    .notification-header {
+      font-size: 1.2rem;
+    }
+  
+    .notification-item {
+      padding: 12px;
+    }
+  
+    .NotificationBox h2 {
+      font-size: 1.5rem;
+    }
+  }
+  

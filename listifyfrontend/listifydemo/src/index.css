@@ -1,0 +1,132 @@
+/* Reset padding and margin for body and html */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* SideBar */
+.Layout {
+  display: flex;  /* Use flexbox to arrange child elements side by side */
+  height: 100vh;
+}
+
+.SideNavigation {
+  width: 500px; /* Fixed width for the side navigation */
+  background-color: #182848;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-top-right-radius: 50px;   /* Border radius on top-right */
+  border-bottom-right-radius: 50px; /* Border radius on bottom-right */
+  box-shadow: 2px 0px 20px rgba(0, 0, 0, 0.9); /* Adding shadow */
+  z-index: 2;
+  font-family: 'Roboto', sans-serif; /* Change the font here */
+}
+
+.SideNavigation .side-nav-title {
+  color: #ffffff;  /* White text for the "this" title */
+  font-size: 32px;  /* Larger font size */
+  font-weight: bold;
+  margin-bottom: 20px;  /* Space between "this" and the links */
+  text-align: center;  /* Center the text */
+}
+
+.SideNavigation a {
+  margin-bottom: 10px;  /* Reduced bottom margin for the links */
+  text-decoration: none;
+  color: white; /* Set text color to white for better contrast */
+  font-size: 25px;  /* Increase font size */
+  font-family: 'Roboto', sans-serif; /* Change font for links */
+  padding: 5px 8px;  /* Reduced padding to make the container thinner */
+  border-radius: 5px; /* Optional: Adds rounded corners to the links */
+  text-align: center;  /* Center text */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for hover */
+  border: 2px solid #7f9cba; /* Default border color for all links */
+  border-radius: 20px;
+  height: 50px;
+}
+
+.SideNavigation a.active-link {
+  font-weight: bold;
+  color: #182848;  /* Ensure the color is white for active state */
+  background-color: #7f9cba; /* Highlight active link with background */
+  padding: 5px 8px;  /* Thinner container for active link */
+}
+
+.SideNavigation a:hover {
+  background-color: #ffffff; /* Darker background color for hover */
+  color: #182848; /* White text color on hover */
+  padding: 5px 8px;  /* Thinner container for hover effect */
+  border: 2px solid #ffffff; /* Border for hover effect */
+}
+
+/* MainContent */
+/* MainContent */
+.MainContent {
+  flex-grow: 1;  /* This makes the MainContent take the remaining space */
+  padding: 20px;
+  background-color: #ffffff;
+  height: calc(100vh - 40px); /* Subtract padding from total height */
+  overflow-y: auto;  /* Ensure content is scrollable */
+  z-index: 1;
+  
+  display: flex;  /* Use flexbox to center content */
+  justify-content: center;  /* Center content horizontally */
+  align-items: center;  /* Center content vertically */
+}
+
+
+/* Profile Header Styles */
+.profile-header {
+  display: flex;
+  justify-content: space-between;  /* This spaces out the left and right sections */
+  padding: 10px 20px;
+  background-color: #182848;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 50px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Aligns the profile image and username to the left */
+}
+
+.profile-image {
+  width: 70px; /* Size of the profile image */
+  height: 70px;
+  border-radius: 50%; /* Circular profile image */
+  margin-right: 10px; /* Space between image and username */
+  margin-bottom: 13px;
+}
+
+.username {
+  color: white;
+  font-size: 20px; /* Adjust size of username */
+  margin-right: 10px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;  /* Aligns the notification button to the right */
+}
+
+.header-right .notification-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+  color: white;
+  padding: 10px;  /* Add padding for better touch target */
+}
+
+.header-right .notification-btn:hover {
+  background-color: #fff; /* Change background on hover */
+  color: #182848;  /* Change text color on hover */
+  padding: 10px;  /* Keep the padding on hover */
+}
