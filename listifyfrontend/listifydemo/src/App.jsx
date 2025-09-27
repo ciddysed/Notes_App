@@ -7,7 +7,6 @@ import logo from './assets/logo.png';
 // Import pages
 import Login from './pages/loginpage';
 import UserRegister from './pages/Registeruser';
-import AdminRegister from './pages/Registeradmin';
 import CalendarPage from './pages/Calendar';
 import Tasks from './pages/Tasks';
 import Notification from './pages/Notification';
@@ -56,10 +55,7 @@ const App = () => {
 
   const handleLogin = async (type, credentials) => {
     try {
-      const url =
-        type === 'users'
-          ? 'http://localhost:8080/api/auth/login/user'
-          : 'http://localhost:8080/api/auth/login/admin';
+      const url = 'http://localhost:8080/api/auth/login/user';
 
       const response = await axios.post(url, credentials);
       const userData = response.data;
@@ -82,12 +78,9 @@ const App = () => {
 
   const registerUser = async (type, credentials) => {
     try {
-      const url =
-        type === 'users'
-          ? 'http://localhost:8080/api/auth/register/user'
-          : 'http://localhost:8080/api/auth/register/admin';
+      const url = 'http://localhost:8080/api/auth/register/user';
       await axios.post(url, credentials);
-      alert(`${type === 'users' ? 'User' : 'Admin'} registered successfully!`);
+      alert('User registered successfully!');
       setPage('login');
     } catch (error) {
       alert('Registration failed. Please try again.');
@@ -142,9 +135,6 @@ const App = () => {
               {page === 'userRegister' && (
                 <UserRegister setPage={setPage} registerUser={registerUser} />
               )}
-              {page === 'adminRegister' && (
-                <AdminRegister setPage={setPage} registerUser={registerUser} />
-              )}
             </>
           )}
         </div>
@@ -186,3 +176,4 @@ const App = () => {
 };
 
 export default App;
+      

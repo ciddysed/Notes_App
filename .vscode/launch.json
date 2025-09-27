@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ListifyApplication<Listify>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "Yuutsu_1.Listify.ListifyApplication",
+            "projectName": "Listify",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

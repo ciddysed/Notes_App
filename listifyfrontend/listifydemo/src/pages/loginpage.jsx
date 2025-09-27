@@ -14,13 +14,6 @@ const Login = ({ setPage, handleLogin }) => {
     }
   };
 
-  const loginAsAdmin = async () => {
-    const success = await handleLogin('admins', { email, password });
-    if (success) {
-      navigate('/calendar');
-    }
-  };
-
   return (
     <>
       <div style={styles.leftSide}>
@@ -63,11 +56,6 @@ const Login = ({ setPage, handleLogin }) => {
             <button style={styles.button} onClick={loginAsUser}>Login as User</button>
           </div>
         </div>
-      </div>
-
-      <div style={styles.adminButtonsContainer}>
-        <button style={styles.adminButton} onClick={() => setPage('adminRegister')}>Admin Register</button>
-        <button style={styles.adminButton} onClick={loginAsAdmin}>Login as Admin</button>
       </div>
     </>
   );
@@ -220,28 +208,6 @@ const styles = {
     backgroundColor: '#0d1e2d',
     transform: 'scale(1.05)',
   },
-  adminButtonsContainer: {
-    position: 'absolute',
-    bottom: '20px',
-    right: '20px',
-    zIndex: 3,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  adminButton: {
-    width: '150px', // Smaller width
-    padding: '10px 15px', // Smaller padding
-    backgroundColor: '#0d1e2d', // Darker blue background
-    color: '#fff',
-    border: 'none',
-    borderRadius: '8px',
-    fontWeight: 'bold',
-    cursor: 'pointer',
-    fontSize: '14px', // Smaller font size
-    transition: 'background-color 0.3s, transform 0.2s',
-    marginBottom: '5px',
-  },
 };
 
 const keyframes = `
@@ -257,3 +223,5 @@ const keyframes = `
 }`;
 
 export default Login;
+    
+    

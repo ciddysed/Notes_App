@@ -128,70 +128,148 @@ const Tasks = () => {
         <div>
             <Navigation />
     
-            {/* Task list container to keep task items scrollable */}
             <div className="task-list-container">
                 <div className="task-list">
-                    {todos.map((todo) => (
-                        <div key={todo.id}>
-                            <div className="task-item">
-                                <div className="task-content">
-                                    <h3>{todo.task}</h3>
-                                    <span className={`task-status ${todo.taskStatus.toLowerCase()}`}>
-                                        Status: {todo.taskStatus}
-                                    </span>
+                    {/* Task Statistics */}
+                    {todos.length > 0 && (
+                        <div className="task-stats">
+                            <div className="stat-card pending">
+                                <div className="stat-icon">⏳</div>
+                                <div className="stat-number">
+                                    {todos.filter(todo => todo.taskStatus === 'Pending').length}
                                 </div>
-                                <div className="task-actions">
-                                    <button className="update-btn" onClick={() => handleEditTodo(todo.id)}>
-                                        Update
-                                    </button>
-                                    <button className="delete-btn" onClick={() => handleDeleteTodo(todo.id)}>
-                                        Delete
-                                    </button>
-                                    {todo.date && (
-                                        <button className="remove-date-btn" onClick={() => handleRemoveDateFromTask(todo.id)}>
-                                            Remove Date
-                                        </button>
-                                    )}
-                                </div>
+                                <div className="stat-label">Pending</div>
                             </div>
-    
-                            <div className="subnotes-section">
-                                <h4>Subnotes</h4>
-                                <Subnote
-                                    taskId={todo.id}
-                                    subnotes={Array.isArray(todo.subnotes) ? todo.subnotes : []}
-                                    setSubnotes={(newSubnotes) => {
-                                        setTodos(prevTodos =>
-                                            prevTodos.map(item =>
-                                                item.id === todo.id ? { ...item, subnotes: newSubnotes } : item
-                                            )
-                                        );
-                                    }}
-                                />
+                            <div className="stat-card ongoing">
+                                <div className="stat-icon">🔄</div>
+                                <div className="stat-number">
+                                    {todos.filter(todo => todo.taskStatus === 'Ongoing').length}
+                                </div>
+                                <div className="stat-label">In Progress</div>
+                            </div>
+                            <div className="stat-card done">
+                                <div className="stat-icon">✅</div>
+                                <div className="stat-number">
+                                    {todos.filter(todo => todo.taskStatus === 'Done').length}
+                                </div>
+                                <div className="stat-label">Completed</div>
                             </div>
                         </div>
-                    ))}
+                    )}
+
+                    {todos.length === 0 ? (
+                        <div className="empty-state">
+                            <div className="empty-state-icon">📋</div>
+                            <h2>No Tasks Yet</h2>
+                            <p>Create your first task to get started with organizing your work!</p>
+                        </div>
+                    ) : (
+                        todos.map((todo) => (
+                            <div key={todo.id} className="task-wrapper">
+                                <div className="task-item">
+                                    <div className="task-header">
+                                        <div className="task-content">
+                                            <h3>{todo.task}</h3>
+                                            <div className="task-meta">
+                                                <span className={`task-status ${todo.taskStatus.toLowerCase()}`}>
+                                                    {todo.taskStatus === 'Pending' && '⏳'}
+                                                    {todo.taskStatus === 'Ongoing' && '🔄'}
+                                                    {todo.taskStatus === 'Done' && '✅'}
+                                                    <span>{todo.taskStatus}</span>
+                                                </span>
+                                                {todo.date && (
+                                                    <div className="task-date">
+                                                        <span className="date-icon">📅</span>
+                                                        <span>Due {new Date(todo.date).toLocaleDateString()}</span>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <div className="task-actions">
+                                            <button 
+                                                className="update-btn" 
+                                                onClick={() => handleEditTodo(todo.id)}
+                                                title="Edit this task"
+                                            >
+                                                <span>✏️</span> Edit
+                                            </button>
+                                            <button 
+                                                className="delete-btn" 
+                                                onClick={() => handleDeleteTodo(todo.id)}
+                                                title="Delete this task permanently"
+                                            >
+                                                <span>🗑️</span> Delete
+                                            </button>
+                                            {todo.date && (
+                                                <button 
+                                                    className="remove-date-btn" 
+                                                    onClick={() => handleRemoveDateFromTask(todo.id)}
+                                                    title="Remove due date"
+                                                >
+                                                    <span>📅</span> Clear Date
+                                                </button>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div className="subnotes-section">
+                                    <div className="subnotes-header">
+                                        <h4>📝 Notes & Details</h4>
+                                        <div className="subnotes-count">
+                                            {Array.isArray(todo.subnotes) ? todo.subnotes.length : 0} notes
+                                        </div>
+                                    </div>
+                                    <Subnote
+                                        taskId={todo.id}
+                                        subnotes={Array.isArray(todo.subnotes) ? todo.subnotes : []}
+                                        setSubnotes={(newSubnotes) => {
+                                            setTodos(prevTodos =>
+                                                prevTodos.map(item =>
+                                                    item.id === todo.id ? { ...item, subnotes: newSubnotes } : item
+                                                )
+                                            );
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                        ))
+                    )}
                 </div>
             </div>
     
             <div className="todo-input">
-                <button onClick={handleAddTodos}>
-                    {editId ? 'Update Task' : 'Add Task'}
-                </button>
+                <div className="input-label">
+                    {editId ? '✏️ Edit Task' : '➕ New Task'}
+                </div>
                 <input
                     type="text"
                     value={todoValue}
                     onChange={(e) => setTodoValue(e.target.value)}
-                    placeholder="Enter a task"
+                    placeholder={editId ? 'Update your task...' : 'What would you like to accomplish?'}
+                    onKeyPress={(e) => e.key === 'Enter' && handleAddTodos()}
                 />
                 <select
                     value={taskStatus}
                     onChange={(e) => setTaskStatus(e.target.value)}
+                    title="Set task priority"
                 >
-                    <option value="Pending">Pending</option>
-                    <option value="Ongoing">Ongoing</option>
-                    <option value="Done">Done</option>
+                    <option value="Pending">⏳ Pending</option>
+                    <option value="Ongoing">🔄 In Progress</option>
+                    <option value="Done">✅ Completed</option>
                 </select>
+                <button onClick={handleAddTodos} className="primary-btn">
+                    {editId ? '💾 Update' : '➕ Add Task'}
+                </button>
+                {editId && (
+                    <button 
+                        className="cancel"
+                        onClick={resetTodoInput}
+                        title="Cancel editing and clear form"
+                    >
+                        ❌ Cancel
+                    </button>
+                )}
             </div>
         </div>
     );

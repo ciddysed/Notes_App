@@ -1,58 +1,71 @@
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lora:wght@400;600&display=swap');
 
+/* Color Variables for Maroon and Gold Theme */
+:root {
+    --maroon-primary: #800020;
+    --maroon-secondary: #9c2c47;
+    --gold-primary: #ffd700;
+    --gold-secondary: #ffed4e;
+    --gold-light: #fff8dc;
+}
+
 /* Apply fonts to the body and specific elements */
 body {
-    font-family: 'Arial', sans-serif; /* Default font for the app */
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #f9f9f9;
-    color: #333;
+    background: linear-gradient(135deg, var(--gold-light) 0%, #ffffff 100%);
+    color: var(--maroon-primary);
 }
 
 /* Container styling */
 .home-container {
-    width: 1000px; /* Increase the container width */
-    margin: 0 auto; /* Center the container on the page */
+    width: 1000px;
+    margin: 0 auto;
     padding: 20px;
-    background-color: #fff; /* Add a white background for contrast */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Increase shadow size */
-    border-radius: 10px; /* Rounded corners */
+    background-color: #fff;
+    box-shadow: 0 15px 30px rgba(128, 0, 32, 0.3);
+    border: 3px solid var(--gold-primary);
+    border-radius: 20px;
 }
 
 /* Welcome container styling */
 .welcome-container {
     display: flex;
-    align-items: center; /* Align items vertically */
-    justify-content: center; /* Center horizontally */
-    gap: 15px; /* Add spacing between elements */
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
     margin: 20px auto;
 }
 
 .welcome-box {
-    background-color: #4b6cb7; /* Blue background */
-    padding: 10px 20px;
+    background: linear-gradient(135deg, var(--maroon-primary) 0%, var(--maroon-secondary) 100%);
+    padding: 15px 25px;
     border-radius: 15px;
     display: inline-block;
     text-align: center;
-    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4); /* Add a bigger shadow */
+    border: 3px solid var(--gold-primary);
+    box-shadow: 0 8px 16px rgba(128, 0, 32, 0.4);
 }
 
 .welcome-box h1 {
-    font-family: 'Arial', sans-serif; /* Match the default font */
+    font-family: 'Arial', sans-serif;
     font-size: 2.5rem;
-    color: white; /* White text for contrast */
+    color: var(--gold-primary);
     margin: 0;
     font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .welcome-text {
-    font-family: 'Arial', sans-serif; /* Match the default font */
+    font-family: 'Arial', sans-serif;
     font-size: 2.5rem;
-    color: #2c3e50;
+    color: var(--maroon-primary);
     margin: 0;
     font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* Logo styling */
@@ -62,48 +75,55 @@ body {
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 12px rgba(128, 0, 32, 0.3);
+    border: 4px solid var(--gold-primary);
 }
 
 /* Tagline styling */
 .tagline {
     font-size: 1.2rem;
     text-align: center;
-    color: #7f8c8d;
+    color: var(--maroon-secondary);
     margin: 10px 0 30px;
+    font-weight: 500;
 }
 
 /* Call-to-action button styling */
 .cta-section {
     display: flex;
-    justify-content: center; /* Center the button horizontally */
+    justify-content: center;
     margin: 20px 0;
 }
 
 .cta-button {
     font-family: 'Arial', sans-serif;
-    font-size: 1rem;
-    padding: 10px 20px;
-    background-color: #2c3e50;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
+    font-size: 1.2rem;
+    padding: 15px 30px;
+    background: linear-gradient(135deg, var(--maroon-primary) 0%, var(--maroon-secondary) 100%);
+    color: var(--gold-primary);
+    border: 3px solid var(--gold-primary);
+    border-radius: 12px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
     margin-top: 50px;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4); /* Add a bigger shadow */
+    font-weight: bold;
+    box-shadow: 0 8px 16px rgba(128, 0, 32, 0.4);
 }
 
 .cta-button:hover {
-    background-color: #4b6cb7;
+    background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-secondary) 100%);
+    color: var(--maroon-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(255, 215, 0, 0.4);
 }
 
 /* Footer styling */
 .footer-text {
     font-size: 0.9rem;
     text-align: center;
-    color: #95a5a6;
-    margin: 10px auto; /* Center the copyright text */
+    color: var(--maroon-secondary);
+    margin: 10px auto;
+    font-weight: 500;
 }
 
 /* Media query for responsiveness */
