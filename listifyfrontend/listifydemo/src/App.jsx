@@ -95,6 +95,15 @@ const App = () => {
     }
   };
 
+  // Add logout function
+  const handleLogout = () => {
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('user');
+    localStorage.removeItem('userId');
+    setIsLoggedIn(false);
+    setPage('login');
+  };
+
   return (
     <Router>
       <div className="Layout">
@@ -121,6 +130,9 @@ const App = () => {
               <NavLink to="/" className="nav-link">HOME</NavLink>
               <NavLink to="/calendar" className="nav-link">CALENDAR</NavLink>
               <NavLink to="/tasks" className="nav-link">TASKS</NavLink>
+              <button className="logout-button" onClick={handleLogout}>
+                LOGOUT
+              </button>
             </>
           ) : (
             <>
