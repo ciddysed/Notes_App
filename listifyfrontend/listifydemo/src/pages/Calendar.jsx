@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 import axios from 'axios';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './Calendar.css';
-import Navigation from '../components/Navigation.jsx'; // Import Navigation
+import Navigation from '../components/Navigation.jsx';
 
 Modal.setAppElement('#root');
 
@@ -17,9 +17,11 @@ function CalendarPage() {
     const [tasks, setTasks] = useState({});
     const [existingTasks, setExistingTasks] = useState([]);
     const [selectedTask, setSelectedTask] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
     const apiUrl = 'http://localhost:8080/api/task';
 
     const fetchTasks = async () => {
+        setIsLoading(true);
         try {
             const response = await axios.get(`${apiUrl}/getAllTasks`);
             const fetchedTasks = response.data;
@@ -38,6 +40,8 @@ function CalendarPage() {
         } catch (error) {
             console.error('Error fetching tasks:', error);
             alert('Failed to load tasks. Please try again later.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -56,20 +60,24 @@ function CalendarPage() {
     };
 
     const recordExistingTaskWithDate = async (taskId) => {
-        const localDateString = date.toLocaleDateString('en-CA'); // Format as 'YYYY-MM-DD'
+        const localDateString = date.toLocaleDateString('en-CA');
+        setIsLoading(true);
 
         try {
             const response = await axios.post(`${apiUrl}/recordTask/${localDateString}/${taskId}`);
             if (response.status === 200) {
                 console.log('Recorded Task:', response.data);
-                fetchTasks(); // Refresh tasks to update the calendar
-                setIsModalOpen(false); // Automatically close the modal after recording the task
+                fetchTasks();
+                setIsModalOpen(false);
+                setSelectedTask(null);
             } else {
                 console.error('Failed to record task, response status:', response.status);
             }
         } catch (error) {
             console.error('Error recording task:', error.response ? error.response.data : error.message);
             alert('Failed to record task. Please check the console for details.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -79,43 +87,46 @@ function CalendarPage() {
 
     return (
         <div className="calendar-page">
-            <Navigation /> {/* Add the Navigation component here */}
+            <Navigation />
 
-            {/* Title Container */}
             <div className="title-container">
-                <h2>Calendar Page</h2>
+                <h2>📅 Calendar Overview</h2>
+                <p>Click on any date to assign tasks or view your schedule</p>
             </div>
 
-            {/* Record Task Container */}
             <div className="record-task-container">
-                <h3>Assign Task for {date.toDateString()}</h3>
+                <h3>📋 Quick Task Assignment for {date.toDateString()}</h3>
 
-                <select
-                    onChange={(e) => {
-                        const taskId = Number(e.target.value);
-                        const task = existingTasks.find(task => task.id === taskId);
-                        setSelectedTask(task);
-                    }}
-                >
-                    <option value="">Select an existing task</option>
-                    {existingTasks.map((task) => (
-                        <option key={task.id} value={task.id}>{task.task}</option>
-                    ))}
-                </select>
+                <div className="task-assignment-row">
+                    <select
+                        value={selectedTask?.id || ''}
+                        onChange={(e) => {
+                            const taskId = Number(e.target.value);
+                            const task = existingTasks.find(task => task.id === taskId);
+                            setSelectedTask(task);
+                        }}
+                        disabled={isLoading}
+                    >
+                        <option value="">Choose a task to assign...</option>
+                        {existingTasks.map((task) => (
+                            <option key={task.id} value={task.id}>{task.task}</option>
+                        ))}
+                    </select>
 
-                <button
-                    onClick={() => {
-                        if (selectedTask) {
-                            recordExistingTaskWithDate(selectedTask.id);
-                        }
-                    }}
-                    disabled={!selectedTask}
-                >
-                    Record Existing Task
-                </button>
+                    <button
+                        className="assign-btn"
+                        onClick={() => {
+                            if (selectedTask) {
+                                recordExistingTaskWithDate(selectedTask.id);
+                            }
+                        }}
+                        disabled={!selectedTask || isLoading}
+                    >
+                        {isLoading ? '⏳ Assigning...' : '✅ Assign Task'}
+                    </button>
+                </div>
             </div>
 
-            {/* Calendar Component */}
             <Calendar
                 localizer={localizer}
                 events={events}
@@ -124,9 +135,9 @@ function CalendarPage() {
                 selectable
                 onSelectSlot={handleSelectSlot}
                 style={{ height: 500 }}
+                className="enhanced-calendar"
             />
 
-            {/* Modal for assigning task */}
             <Modal
                 isOpen={isModalOpen}
                 onRequestClose={() => setIsModalOpen(false)}
@@ -134,32 +145,47 @@ function CalendarPage() {
                 className="task-modal"
                 overlayClassName="task-modal-overlay"
             >
-                <h3>Assign Task for {date.toDateString()}</h3>
+                <div className="modal-content">
+                    <h3>📋 Assign Task for {date.toDateString()}</h3>
 
-                <select
-                    onChange={(e) => {
-                        const taskId = Number(e.target.value);
-                        const task = existingTasks.find(task => task.id === taskId);
-                        setSelectedTask(task);
-                    }}
-                >
-                    <option value="">Select an existing task</option>
-                    {existingTasks.map((task) => (
-                        <option key={task.id} value={task.id}>{task.task}</option>
-                    ))}
-                </select>
+                    <div className="modal-task-selection">
+                        <select
+                            value={selectedTask?.id || ''}
+                            onChange={(e) => {
+                                const taskId = Number(e.target.value);
+                                const task = existingTasks.find(task => task.id === taskId);
+                                setSelectedTask(task);
+                            }}
+                            disabled={isLoading}
+                        >
+                            <option value="">Choose a task to assign...</option>
+                            {existingTasks.map((task) => (
+                                <option key={task.id} value={task.id}>{task.task}</option>
+                            ))}
+                        </select>
+                    </div>
 
-                <button
-                    onClick={() => {
-                        if (selectedTask) {
-                            recordExistingTaskWithDate(selectedTask.id);
-                        }
-                    }}
-                    disabled={!selectedTask}
-                >
-                    Record Existing Task
-                </button>
-                <button onClick={() => setIsModalOpen(false)}>Cancel</button>
+                    <div className="modal-actions">
+                        <button
+                            className="assign-btn"
+                            onClick={() => {
+                                if (selectedTask) {
+                                    recordExistingTaskWithDate(selectedTask.id);
+                                }
+                            }}
+                            disabled={!selectedTask || isLoading}
+                        >
+                            {isLoading ? '⏳ Assigning...' : '✅ Assign Task'}
+                        </button>
+                        <button 
+                            className="cancel-btn"
+                            onClick={() => setIsModalOpen(false)}
+                            disabled={isLoading}
+                        >
+                            ❌ Cancel
+                        </button>
+                    </div>
+                </div>
             </Modal>
         </div>
     );

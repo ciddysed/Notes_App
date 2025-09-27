@@ -196,37 +196,30 @@
     font-family: 'Roboto', sans-serif; /* Or use your desired font */
 }
 
+/* Enhanced title container */
 .title-container {
-    background-color: #182848; /* Background color for the title container */
-    color: #fff; /* Text color for the title */
-    padding: 20px;
+    background: linear-gradient(135deg, #182848 0%, #1e3056 100%);
+    color: #fff;
+    padding: 25px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 20px rgba(24, 40, 72, 0.15);
     text-align: center;
-    margin-bottom: 20px; /* Space below the title container */
+    margin-bottom: 25px;
 }
 
-/* Title styling */
 .title-container h2 {
-    font-family: 'Open Sans', sans-serif; /* Use Open Sans font */
-    font-size: 2em; /* Make the title larger */
-    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 2.2em;
+    margin: 0 0 8px 0;
     color: #ffffff;
+    font-weight: 600;
 }
 
-/* Record Task Container */
-.record-task-container {
-    position: relative; /* Can use absolute for precise positioning */
-    z-index: 10; /* Ensure it appears above the calendar */
-    background-color: #ffffff;
-    border: 2px solid #182848;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    text-align: center;
-    font-family: 'Open Sans', sans-serif;
-    color: #182848;
+.title-container p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 1rem;
+    color: #e8f4f8;
 }
 
 /* Adjust calendar container */
@@ -240,4 +233,200 @@
     position: relative;
 }
 
-/* Other styles remain unchanged... */
+/* Enhanced record task container */
+.record-task-container {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid #182848;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 18px rgba(24, 40, 72, 0.1);
+    margin-bottom: 25px;
+    font-family: 'Open Sans', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.record-task-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(24, 40, 72, 0.15);
+}
+
+.record-task-container h3 {
+    color: #182848;
+    margin: 0 0 15px 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+/* Task assignment row */
+.task-assignment-row {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.record-task-container select {
+    flex: 1;
+    min-width: 250px;
+    padding: 12px 16px;
+    border: 2px solid #182848;
+    border-radius: 8px;
+    background: white;
+    color: #182848;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.record-task-container select:hover {
+    border-color: #4b6cb7;
+    box-shadow: 0 0 0 3px rgba(24, 40, 72, 0.1);
+}
+
+.record-task-container select:focus {
+    outline: none;
+    border-color: #4b6cb7;
+    box-shadow: 0 0 0 3px rgba(24, 40, 72, 0.2);
+}
+
+.record-task-container select:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Enhanced buttons */
+.assign-btn {
+    background: linear-gradient(135deg, #182848 0%, #1e3056 100%);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(24, 40, 72, 0.2);
+    min-width: 140px;
+}
+
+.assign-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #1e3056 0%, #243a64 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(24, 40, 72, 0.3);
+}
+
+.assign-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Enhanced calendar */
+.enhanced-calendar {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(24, 40, 72, 0.1);
+    transition: all 0.3s ease;
+}
+
+.enhanced-calendar:hover {
+    box-shadow: 0 8px 25px rgba(24, 40, 72, 0.15);
+}
+
+/* Enhanced modal */
+.task-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 90%;
+    border: 2px solid #182848;
+}
+
+.task-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+}
+
+.modal-content h3 {
+    color: #182848;
+    margin: 0 0 20px 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.modal-task-selection {
+    margin-bottom: 20px;
+}
+
+.modal-task-selection select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #182848;
+    border-radius: 8px;
+    background: white;
+    color: #182848;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.cancel-btn {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 100px;
+}
+
+.cancel-btn:hover:not(:disabled) {
+    background: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(108, 117, 125, 0.3);
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .task-assignment-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .record-task-container select {
+        min-width: auto;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+    }
+    
+    .assign-btn,
+    .cancel-btn {
+        min-width: auto;
+    }
+}

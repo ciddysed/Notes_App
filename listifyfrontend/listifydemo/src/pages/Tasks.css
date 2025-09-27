@@ -546,6 +546,81 @@ button:hover::before {
     60% { transform: translateY(-5px); }
 }
 
+/* Loading state enhancement */
+.loading-state {
+    text-align: center;
+    padding: 80px 40px;
+    background: var(--white);
+    border-radius: 15px;
+    margin: 50px auto;
+    max-width: 500px;
+    box-shadow: 0 4px 18px var(--light-shadow);
+}
+
+.loading-spinner {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+.loading-state p {
+    color: var(--maroon-secondary);
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Enhanced button disabled states */
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+button:disabled:hover {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Improved button loading states */
+.delete-btn:disabled {
+    background: #dc3545;
+    color: var(--white);
+}
+
+.remove-date-btn:disabled {
+    background: #fd7e14;
+    color: var(--white);
+}
+
+/* Enhanced input focus states */
+.todo-input input[type="text"]:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    background: #f8f9fa;
+}
+
+.todo-input select:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    background: #f8f9fa;
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Enhanced hover effects for task items */
+.task-item:hover .task-content h3 {
+    color: var(--maroon-secondary);
+}
+
 /* Responsive design adjustments for landscape grid */
 @media (max-width: 1600px) {
     .task-list {
