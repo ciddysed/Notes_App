@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
@@ -12,6 +12,8 @@ import Tasks from './pages/Tasks';
 import Notification from './pages/Notification';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
+// Wallet panel for Cardano actions (lazy-loaded to reduce initial bundle size)
+const WalletPanel = lazy(() => import('./components/cardano/WalletPanel'));
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -122,6 +124,7 @@ const App = () => {
             <>
               <NavLink to="/" className="nav-link">HOME</NavLink>
               <NavLink to="/calendar" className="nav-link">CALENDAR</NavLink>
+              <NavLink to="/wallet" className="nav-link">WALLET</NavLink>
               <NavLink to="/tasks" className="nav-link">TASKS</NavLink>
               <button className="logout-button" onClick={handleLogout}>
                 LOGOUT
@@ -166,6 +169,14 @@ const App = () => {
         <Route
           path="/profile/:username"
           element={<Profile username={username} setIsLoggedIn={setIsLoggedIn} />}
+        />
+        <Route
+          path="/wallet"
+          element={
+            <Suspense fallback={<div>Loading wallet...</div>}>
+              <WalletPanel />
+            </Suspense>
+          }
         />
       </Routes>
           
