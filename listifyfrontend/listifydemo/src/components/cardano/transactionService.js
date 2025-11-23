@@ -1,4 +1,3 @@
-// src/services/transactionService.js
 import * as CSL from '@emurgo/cardano-serialization-lib-browser';
 
 const BLOCKFROST_API_KEY = import.meta.env.VITE_BLOCKFROST_API_KEY;
