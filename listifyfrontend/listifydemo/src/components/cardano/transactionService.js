@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import * as CSL from '@emurgo/cardano-serialization-lib-browser';
 
 const BLOCKFROST_API_KEY = import.meta.env.VITE_BLOCKFROST_API_KEY;
@@ -210,3 +211,6 @@ export async function buildSignAndSubmit({
     };
   }
 }
+=======
+// src/services/transactionService.js
+>>>>>>> d686a1f691fe4eddb549364592a574685489cb3f
