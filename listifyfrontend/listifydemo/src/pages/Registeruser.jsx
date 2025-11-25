@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
+import logo from '../assets/logo.png'; // optional: show logo in left side
 
 const UserRegister = ({ setPage, registerUser, checkEmailExists }) => {
   const [firstName, setFirstName] = useState('');
@@ -11,7 +13,6 @@ const UserRegister = ({ setPage, registerUser, checkEmailExists }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if email is unique when email input changes
     const checkEmail = async () => {
       if (email) {
         const isUnique = await checkEmailExists(email);
@@ -21,20 +22,29 @@ const UserRegister = ({ setPage, registerUser, checkEmailExists }) => {
     checkEmail();
   }, [email, checkEmailExists]);
 
-  const isFormValid = () => {
-    return firstName && lastName && email && password && isEmailUnique;
-  };
+  const isFormValid = () => firstName && lastName && email && password && isEmailUnique;
 
   const handleRegister = async () => {
     const success = await registerUser('users', { firstName, lastName, email, password });
-    if (success) {
-      navigate('/');
-    }
+    if (success) navigate('/');
   };
 
   return (
     <>
       <div style={styles.leftSide}>
+        {logo && <img
+                  src={logo}
+                  alt="Logo"
+                  style={{
+                    width: '150px',            // adjust size as needed
+                    height: '150px',
+                    borderRadius: '50%',       // circular
+                    border: '4px solid var(--gold-primary)', // gold outline
+                    boxShadow: '0 0 15px 5px rgba(255, 215, 0, 0.6)', // soft gold glow
+                    marginBottom: '20px',
+                    boxSizing: 'border-box',   // ensures border is counted in size
+                  }}
+                />}
         <div style={styles.leftSideHeaderContainer}>
           <h1 style={styles.helloContainer}>Hello</h1>
           <h1 style={styles.leftSideHeader}>WELCOME TO LISTIFY!</h1>
@@ -46,51 +56,19 @@ const UserRegister = ({ setPage, registerUser, checkEmailExists }) => {
       <div style={styles.container}>
         <div style={styles.form}>
           <h2 style={styles.welcomeBackHeader}>User Register</h2>
-          <input
-            type="text"
-            placeholder="First Name"
-            style={styles.input}
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Last Name"
-            style={styles.input}
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            style={styles.input}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <input type="text" placeholder="First Name" style={styles.input} value={firstName} onChange={e => setFirstName(e.target.value)} />
+          <input type="text" placeholder="Last Name" style={styles.input} value={lastName} onChange={e => setLastName(e.target.value)} />
+          <input type="email" placeholder="Email" style={styles.input} value={email} onChange={e => setEmail(e.target.value)} />
           {!isEmailUnique && <p style={styles.errorText}>Email is already taken</p>}
+
           <div style={styles.passwordContainer}>
-            <input
-              type={showPassword ? 'text' : 'password'}
-              placeholder="Password"
-              style={styles.input}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <button
-              type="button"
-              style={styles.toggleButton}
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? 'Hide' : 'Show'}
+            <input type={showPassword ? 'text' : 'password'} placeholder="Password" style={styles.input} value={password} onChange={e => setPassword(e.target.value)} />
+            <button type="button" style={styles.toggleButton} onClick={() => setShowPassword(!showPassword)}>
+              {showPassword ? <FiEyeOff /> : <FiEye />}
             </button>
           </div>
-          <button
-            style={styles.button}
-            onClick={handleRegister}
-            disabled={!isFormValid()}
-          >
-            Register
-          </button>
+
+          <button style={styles.button} onClick={handleRegister} disabled={!isFormValid()}>Register</button>
         </div>
       </div>
     </>
@@ -102,139 +80,57 @@ const styles = {
     position: 'absolute',
     top: 0,
     left: 0,
-    width: '60%',
+    width: '70%',
     height: '100vh',
-    backgroundColor: '#ffffff',
-    boxShadow: '16px 0 40px rgba(0, 0, 0, 0.4)',
-    borderRadius: '30px',
-    zIndex: 2,
-    padding: '50px',
-    textAlign: 'center',
-    fontFamily: 'Arial, sans-serif',
-    color: '#333',
+    backgroundColor: 'var(--maroon-primary)',
+    color: 'var(--gold-primary)',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    padding: '40px',
+    fontFamily: '"Segoe UI", "Roboto", sans-serif',
+    borderTopRightRadius: '40px',
+    borderBottomRightRadius: '40px',
+    boxShadow: '8px 0 30px rgba(0,0,0,0.2)',
+  },
+  logo: {
+    width: '120px',
+    marginBottom: '20px',
   },
   leftSideHeaderContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    marginBottom: '15px',
+    textAlign: 'center',
   },
-  helloContainer: {
-    backgroundColor: '#4b6cb7',
-    padding: '5px 10px',
-    borderRadius: '20px',
-    marginRight: '15px',
-    fontSize: '60px',
-    color: 'white',
-  },
-  leftSideHeader: {
-    fontSize: '60px',
-    fontWeight: 'bold',
-    color: '#4b6cb7',
-  },
-  leftSideSubheader: {
-    fontSize: '18px',
-    fontWeight: 'normal',
-    color: '#555',
-    marginBottom: '30px',
-  },
+  helloContainer: { fontSize: '54px', fontWeight: 'bold', margin: '0', color: 'var(--gold-primary)' },
+  leftSideHeader: { fontSize: '28px', fontWeight: '600', margin: '10px 0', color: '#fff' },
+  leftSideSubheader: { fontSize: '16px', color: 'rgba(255,255,255,0.8)', marginBottom: '30px' },
   container: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '45%',
+    width: '30%',
     height: '100vh',
-    background: 'linear-gradient(135deg, #4b6cb7, #182848)',
     position: 'absolute',
-    top: 0,
     right: 0,
-    zIndex: 0,
+    top: 0,
+    backgroundColor: '#f9f9f9',
   },
   form: {
-    backgroundColor: '#ffffff',
-    padding: '50px 60px',
+    backgroundColor: '#fff',
+    padding: '40px 50px',
     borderRadius: '12px',
-    boxShadow: '0 10px 20px rgba(0, 0, 0, 0.15)',
-    width: '380px',
+    boxShadow: '0 6px 18px rgba(0,0,0,0.1)',
+    width: '350px',
     textAlign: 'center',
-    animation: 'popUp 0.5s ease-out',
-    marginLeft: '100px',
   },
-  welcomeBackHeader: {
-    fontSize: '32px',
-    fontWeight: 'bold',
-    color: '#4b6cb7',
-    marginBottom: '20px',
-  },
-  input: {
-    width: '100%',
-    padding: '12px',
-    margin: '10px 0',
-    border: '1px solid #ddd',
-    borderRadius: '8px',
-    fontSize: '16px',
-    backgroundColor: '#f9f9f9',
-    color: '#333',
-    transition: 'border-color 0.3s, box-shadow 0.3s',
-  },
-  passwordContainer: {
-    position: 'relative',
-    marginTop: '5px',
-  },
-  toggleButton: {
-    position: 'absolute',
-    right: '10px',
-    top: '10px',
-    background: 'none',
-    border: 'none',
-    color: '#4b6cb7',
-    cursor: 'pointer',
-  },
-  button: {
-    width: '100%',
-    padding: '14px',
-    backgroundColor: '#4b6cb7',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '8px',
-    fontWeight: 'bold',
-    cursor: 'pointer',
-    fontSize: '16px',
-    transition: 'background-color 0.3s, transform 0.2s',
-    marginTop: '20px',
-  },
-  errorText: {
-    color: 'red',
-    fontSize: '14px',
-    marginTop: '5px',
-  },
-  registerButton: {
-    padding: '12px',
-    backgroundColor: '#182848',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '15px',
-    cursor: 'pointer',
-    fontWeight: 'bold',
-    width: '200px',
-    fontSize: '20px',
-    transition: 'background-color 0.3s, transform 0.2s',
-  },
+  welcomeBackHeader: { fontSize: '26px', fontWeight: '600', color: 'var(--maroon-primary)', marginBottom: '20px' },
+  input: { width: '100%', padding: '12px', margin: '12px 0', border: '1px solid #ccc', borderRadius: '6px', fontSize: '15px', transition: 'border-color 0.3s, box-shadow 0.3s' },
+  passwordContainer: { position: 'relative' },
+  toggleButton: { position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'var(--maroon-primary)', cursor: 'pointer', fontSize: '18px' },
+  button: { width: '100%', padding: '14px', backgroundColor: 'var(--maroon-primary)', color: '#fff', border: 'none', borderRadius: '6px', fontWeight: '600', cursor: 'pointer', fontSize: '15px', marginTop: '20px' },
+  errorText: { color: 'red', fontSize: '14px', marginTop: '5px' },
+  registerButton: { marginTop: '15px', padding: '12px', backgroundColor: 'var(--gold-primary)', color: '#000', border: 'none', borderRadius: '6px', fontWeight: '600', cursor: 'pointer', fontSize: '15px' },
 };
-
-const keyframes = `
-@keyframes popUp {
-  0% {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}`;
 
 export default UserRegister;

@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaEnvelope, FaLock } from 'react-icons/fa';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
+import logo from '../assets/logo.png';
 
 const Login = ({ setPage, handleLogin }) => {
   const [email, setEmail] = useState('');
@@ -16,27 +19,52 @@ const Login = ({ setPage, handleLogin }) => {
 
   return (
     <>
+      {/* LEFT SIDE */}
       <div style={styles.leftSide}>
+        <img
+          src={logo}
+          alt="Logo"
+          style={{
+            width: '150px',            // adjust size as needed
+            height: '150px',
+            borderRadius: '50%',       // circular
+            border: '4px solid var(--gold-primary)', // gold outline
+            boxShadow: '0 0 15px 5px rgba(255, 215, 0, 0.6)', // soft gold glow
+            marginBottom: '20px',
+            boxSizing: 'border-box',   // ensures border is counted in size
+          }}
+        />
+        
         <div style={styles.leftSideHeaderContainer}>
           <h1 style={styles.helloContainer}>Hello</h1>
           <h1 style={styles.leftSideHeader}>WELCOME TO LISTIFY!</h1>
         </div>
         <h5 style={styles.leftSideSubheader}>Never worry about missing a task again</h5>
-        <button style={styles.registerButton} onClick={() => setPage('userRegister')}>User Register</button>
+        <button style={styles.registerButton} onClick={() => setPage('userRegister')}>
+          User Register
+        </button>
       </div>
 
+      {/* RIGHT SIDE (FORM) */}
       <div style={styles.container}>
         <div style={styles.form}>
-          <h2 style={styles.welcomeBackHeader}>Welcome Back</h2>
+          <h2 style={styles.welcomeBackHeader}>Welcome👋</h2>
           
-          <input
-            type="text"
-            placeholder="Email"
-            style={styles.input}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <div style={styles.passwordContainer}>
+          {/* EMAIL INPUT */}
+          <div style={styles.inputWrapper}>
+            <FaEnvelope style={styles.icon} />
+            <input
+              type="text"
+              placeholder="Email"
+              style={styles.input}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          {/* PASSWORD INPUT */}
+          <div style={styles.inputWrapper}>
+            <FaLock style={styles.icon} />
             <input
               type={showPassword ? 'text' : 'password'}
               placeholder="Password"
@@ -46,12 +74,14 @@ const Login = ({ setPage, handleLogin }) => {
             />
             <button
               type="button"
-              style={styles.toggleButton}
+              style={styles.iconButton}
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? 'Hide' : 'Show'}
+              {showPassword ? <FiEyeOff /> : <FiEye />}
             </button>
           </div>
+
+          {/* LOGIN BUTTON */}
           <div style={styles.buttonContainer}>
             <button style={styles.button} onClick={loginAsUser}>Login as User</button>
           </div>
@@ -66,106 +96,100 @@ const styles = {
     position: 'absolute',
     top: 0,
     left: 0,
-    width: '60%', // Fills the left side of the screen
+    width: '50%',
     height: '100vh',
-    backgroundColor: '#ffffff', // White background
-    boxShadow: '16px 0 40px rgba(0, 0, 0, 0.4)', // Bigger and more visible shadow
-    borderRadius: '30px',
-    zIndex: 2, // Ensure the left side is above the form
-    padding: '50px',
-    textAlign: 'center',
-    fontFamily: 'Arial, sans-serif', // Add a font family
-    color: '#333', // Change text color
+    backgroundColor: 'var(--maroon-primary)',
+    color: 'white',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center', // Center the content both vertically and horizontally
+    alignItems: 'center',
+    padding: '40px',
+    fontFamily: '"Segoe UI", "Roboto", sans-serif',
+    borderTopRightRadius: '40px',
+    borderBottomRightRadius: '40px',
+  
+  },
+  logo: {
+    width: '120px',
+    marginBottom: '20px',
   },
   leftSideHeaderContainer: {
-    display: 'flex', // Display header content in a row
-    justifyContent: 'center', // Center them horizontally
-    alignItems: 'center', // Align them vertically
+    marginBottom: '15px',
+    textAlign: 'center',
   },
   helloContainer: {
-    backgroundColor: '#4b6cb7', // Blue background
-    padding: '5px 10px',
-    borderRadius: '20px',
-    marginRight: '15px', // Space between "Hello" and "WELCOME"
-    fontSize: '60px',
-    color: 'white', // Set text color to white
+    fontSize: '48px',
+    fontWeight: 'bold',
+    margin: '0',
+    color: 'var(--gold-primary)',
   },
   leftSideHeader: {
-    fontSize: '60px', // Make the font even bigger
-    fontWeight: 'bold', // Ensure boldness
-    color: '#4b6cb7', // Set the color to blue for emphasis
+    fontSize: '26px',
+    fontWeight: '600',
+    margin: '10px 0',
+    color: '#fff',
   },
   leftSideSubheader: {
-    fontSize: '18px', // Increase font size
-    fontWeight: 'normal', // Normal weight for subheader
-    color: '#555', // Slightly lighter color
+    fontSize: '16px',
+    color: 'rgba(255,255,255,0.8)',
     marginBottom: '30px',
   },
   container: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '45%', // Right half of the screen
+    width: '50%',
     height: '100vh',
-    background: 'linear-gradient(135deg, #4b6cb7, #182848)', // Gradient background
     position: 'absolute',
+    right: 0,
     top: 0,
-    right: 0, // Move the form to the right side
-    zIndex: 0, // Ensure the form is behind the left side div
+    backgroundColor: '#f9f9f9',
   },
   form: {
-    backgroundColor: '#ffffff',
-    padding: '50px 60px', // Increased padding for more space
+    backgroundColor: '#fff',
+    padding: '40px 50px',
     borderRadius: '12px',
-    boxShadow: '0 10px 20px rgba(0, 0, 0, 0.15)',
-    width: '380px', // Wider form
+    boxShadow: '0 6px 18px rgba(0, 0, 0, 0.1)',
+    width: '350px',
     textAlign: 'center',
-    animation: 'popUp 0.5s ease-out',
-    marginLeft: '100px',
+    animation: 'popUp 0.6s ease',
   },
   welcomeBackHeader: {
-    fontSize: '32px', // Increased font size
-    fontWeight: 'bold', // Bold style
-    color: '#4b6cb7', // Blue color
-    marginBottom: '20px',
-  },
-  header: {
     fontSize: '24px',
-    fontWeight: '700',
-    marginBottom: '20px',
-    color: '#333',
+    fontWeight: '600',
+    color: 'var(--maroon-primary)',
+    marginBottom: '25px',
+  },
+  inputWrapper: {
+    position: 'relative',
+    display: 'flex',
+    alignItems: 'center',
+    marginBottom: '18px',
   },
   input: {
     width: '100%',
-    padding: '12px',
-    margin: '10px 0', // Reduced margin between fields
-    border: '1px solid #ddd',
-    borderRadius: '8px',
-    fontSize: '16px',
-    backgroundColor: '#f9f9f9',
-    color: '#333',
+    padding: '12px 40px 12px 35px',
+    border: '1px solid #ccc',
+    borderRadius: '6px',
+    fontSize: '15px',
+    outline: 'none',
     transition: 'border-color 0.3s, box-shadow 0.3s',
   },
-  inputFocus: {
-    borderColor: '#4b6cb7',
-    boxShadow: '0 0 5px rgba(75, 108, 183, 0.5)',
+  icon: {
+    position: 'absolute',
+    left: '10px',
+    color: 'gray',
+    fontSize: '16px',
   },
-  passwordContainer: {
-    position: 'relative',
-    marginTop: '5px', // Reduced margin top to bring it closer to the email input
-  },
-  toggleButton: {
+  iconButton: {
     position: 'absolute',
     right: '10px',
-    top: '10px',
     background: 'none',
     border: 'none',
-    color: '#4b6cb7',
     cursor: 'pointer',
+    color: 'var(--maroon-primary)',
+    fontSize: '18px',
   },
   buttonContainer: {
     margin: '20px 0',
@@ -173,55 +197,27 @@ const styles = {
   button: {
     width: '100%',
     padding: '14px',
-    backgroundColor: '#4b6cb7',
+    backgroundColor: 'var(--maroon-primary)',
     color: '#fff',
     border: 'none',
-    borderRadius: '8px',
-    fontWeight: 'bold',
+    borderRadius: '6px',
+    fontWeight: '600',
     cursor: 'pointer',
-    fontSize: '16px',
-    transition: 'background-color 0.3s, transform 0.2s',
-    marginBottom: '5px',
-  },
-  buttonHover: {
-    backgroundColor: '#365f91',
-    transform: 'scale(1.05)',
-  },
-  registerContainer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginTop: '20px',
+    fontSize: '15px',
+    transition: 'background-color 0.3s ease, transform 0.2s ease',
   },
   registerButton: {
+    marginTop: '15px',
     padding: '12px',
-    backgroundColor: '#182848',
-    color: '#fff',
+    backgroundColor: 'var(--gold-primary)',
+    color: '#000',
     border: 'none',
-    borderRadius: '15px',
+    borderRadius: '6px',
+    fontWeight: '600',
     cursor: 'pointer',
-    fontWeight: 'bold',
-    width: '200px',
-    fontSize: '20px',
-    transition: 'background-color 0.3s, transform 0.2s',
-  },
-  registerButtonHover: {
-    backgroundColor: '#0d1e2d',
-    transform: 'scale(1.05)',
+    fontSize: '15px',
+    transition: 'background-color 0.3s ease, transform 0.2s ease',
   },
 };
 
-const keyframes = `
-@keyframes popUp {
-  0% {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}`;
-
 export default Login;
-    
-    
