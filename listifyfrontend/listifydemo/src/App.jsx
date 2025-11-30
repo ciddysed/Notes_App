@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
-import axios from 'axios';
+// No backend: using localStorage for mock data
 import './App.css';
 import logo from './assets/logo.png';
 
@@ -31,63 +31,69 @@ const App = () => {
     }
   }, []);
 
-  const fetchUnreadCount = async () => {
-    try {
-      const response = await axios.get('http://localhost:8080/api/notifications/unread');
-      setUnreadCount(response.data.length);
-    } catch (error) {
-      console.error('Error fetching unread notifications count:', error);
-    }
+  const fetchUnreadCount = () => {
+    const notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
+    const unread = notifications.filter((n) => !n.read).length;
+    setUnreadCount(unread);
   };
 
-  const markNotificationAsRead = async (id) => {
-    try {
-      await axios.put(`http://localhost:8080/api/notifications/${id}/read`);
-      setUnreadCount((prev) => Math.max(0, prev - 1));
-    } catch (error) {
-      console.error('Error marking notification as read:', error);
-    }
+  const markNotificationAsRead = (id) => {
+    const notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
+    const updated = notifications.map((n) => (n.id === id ? { ...n, read: true } : n));
+    localStorage.setItem('notifications', JSON.stringify(updated));
+    fetchUnreadCount();
   };
 
   useEffect(() => {
+    // seed mock notifications if empty
+    const existing = JSON.parse(localStorage.getItem('notifications') || '[]');
+    if (existing.length === 0) {
+      const seed = [
+        { id: 1, title: 'Welcome to Listify', read: false },
+        { id: 2, title: 'Try creating your first task', read: false },
+      ];
+      localStorage.setItem('notifications', JSON.stringify(seed));
+    }
     fetchUnreadCount();
     const interval = setInterval(fetchUnreadCount, 10000);
     return () => clearInterval(interval);
   }, []);
 
   const handleLogin = async (type, credentials) => {
-    try {
-      const url = 'http://localhost:8080/api/auth/login/user';
-
-      const response = await axios.post(url, credentials);
-      const userData = response.data;
-
-      setUsername(`${userData.firstName} ${userData.lastName}`);
-      setIsLoggedIn(true);
-      setPage('home');
-
-      localStorage.setItem('user', JSON.stringify(userData));
-      localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('userId', userData.id); // important for profile use
-
-      return true;
-    } catch (error) {
-      alert('Invalid credentials or user not registered.');
-      console.error('Error logging in:', error);
+    // Mock login: accept any non-empty email/password and create a user profile
+    const { email, password, firstName = 'John', lastName = 'Doe' } = credentials;
+    if (!email || !password) {
+      alert('Please provide email and password.');
       return false;
     }
+    const userData = {
+      id: Date.now(),
+      email,
+      firstName,
+      lastName,
+    };
+    setUsername(`${userData.firstName} ${userData.lastName}`);
+    setIsLoggedIn(true);
+    setPage('home');
+    localStorage.setItem('user', JSON.stringify(userData));
+    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('userId', String(userData.id));
+    return true;
   };
 
   const registerUser = async (type, credentials) => {
-    try {
-      const url = 'http://localhost:8080/api/auth/register/user';
-      await axios.post(url, credentials);
-      alert('User registered successfully!');
+    // Mock register: store the user in localStorage
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    const exists = users.some((u) => u.email === credentials.email);
+    if (exists) {
+      alert('User already registered. Please login.');
       setPage('login');
-    } catch (error) {
-      alert('Registration failed. Please try again.');
-      console.error('Error registering:', error);
+      return;
     }
+    const newUser = { id: Date.now(), ...credentials };
+    localStorage.setItem('users', JSON.stringify([...users, newUser]));
+    alert('User registered successfully!');
+    setPage('login');
   };
 
   // Add logout function
